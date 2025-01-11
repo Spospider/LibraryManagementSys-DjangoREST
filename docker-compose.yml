@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  # Django service
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile  # Make sure to use the Dockerfile you created
+    command: bash -c "python manage.py migrate && celery -A project worker --loglevel=info & python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=True
+      - CELERY_BROKER_URL=redis://redis:6379/0  # Ensure Celery connects to Redis
+    depends_on:
+      - redis
+    networks:
+      - app-network
+
+  # # Celery worker service
+  # celery:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   command: celery -A librarySystem worker --loglevel=info
+  #   depends_on:
+  #     - redis
+  #   networks:
+  #     - app-network
+
+  # Redis service
+  redis:
+    image: "redis:alpine"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
