@@ -142,17 +142,15 @@ REST_FRAMEWORK = {
 }
 
 # For the emails
-# settings.py
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 1025
+EMAIL_HOST = 'mailhog'  # The MailHog service name in Docker
+EMAIL_PORT = 1025       # MailHog SMTP port
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = False
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 DEFAULT_FROM_EMAIL = 'webmaster@localhost'
-#  docker run -d -p 1025:1025 -p 8025:8025 mailhog/mailhog
 
 # Celery
-CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Adjust if using a different broker
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'  # For storing task results
+CELERY_BROKER_URL = 'redis://redis:6379/0'  # Adjust if using a different broker
+CELERY_RESULT_BACKEND = 'redis://redis:6379/0'  # For storing task results

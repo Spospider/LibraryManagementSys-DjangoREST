@@ -43,13 +43,6 @@ sudo apt-get install redis-server  # Ubuntu
 redis-server  # Start Redis server
 ```
 
-configuring celery broker settings
-```
-# settings.py
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
-```
-
 ORM migrations
 ```
 python manage.py makemigrations
