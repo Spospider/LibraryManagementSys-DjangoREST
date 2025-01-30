@@ -98,9 +98,7 @@ class LibrarySystemTestCase(TestCase):
         self.assertIn('message', response.data)
 
     def test_return_book(self):
-        self.test_login_user()
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.access_token)
-        self.client.post('/api/borrow/', self.borrow_data, format='json')
+        self.test_borrow_book()
 
         return_data = {'book': self.book.id}
         response = self.client.post('/api/return/', return_data, format='json')

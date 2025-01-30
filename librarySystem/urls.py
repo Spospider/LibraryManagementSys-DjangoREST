@@ -27,7 +27,7 @@ urlpatterns = [
 
     # Borrowing Books
     path('borrow/', borrows.BorrowBookView.as_view(), name='borrow-book'),  # Borrow a book
-    path('return/', borrows.BorrowBookView.as_view(), name='return-book'),  # Return a borrowed book
+    path('return/', borrows.ReturnBookView.as_view(), name='return-book'),  # Return a borrowed book
     # endpoints for borrowing and returning books in the library management systems, there are some business rules:
     # Allow up to 3 books; return one to borrow a 4th
     # Users must specify a return date (max 1 month); late returns incur a daily penalty

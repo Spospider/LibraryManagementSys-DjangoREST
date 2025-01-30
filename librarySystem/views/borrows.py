@@ -115,7 +115,7 @@ class ReturnBookView(APIView):
             if borrow.return_date > borrow.expected_return_date:
                 days_late = (borrow.return_date - borrow.expected_return_date).days
                 penalty = days_late * request.user.penalty_amount
-                return Response({"message": f"Book returned successfully. Late by {days_late} days. Penalty incurred: ${penalty}."})
+                return Response({"message": f"Book returned successfully. Late by {days_late} days. Penalty incurred: ${penalty}.", "penalty" : penalty})
 
             return Response({"message": "Book returned successfully"})
         
